@@ -23,7 +23,7 @@ func NewUIEngine(sitename string, log sli.ISimpleLogger) *UIEngine {
 
 func (uie *UIEngine) AddNavLink(href string,displayName string, active bool){
 	navitems := uie.SiteDetails.NavItems
-	navitems = append(navitems,&NavLink{Href:href, DisplayName: displayName, Active: active})
+	navitems = append(navitems,&comps.NavLink{Href:href, DisplayName: displayName, Active: active})
 	uie.SiteDetails.NavItems = navitems
 }
 
