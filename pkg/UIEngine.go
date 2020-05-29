@@ -10,8 +10,8 @@ import (
 )
 
 type UIEngine struct {
-	SiteDetails *comps.SiteDetails    `json:"-"`
-	Log sli.ISimpleLogger		`json:"-"`
+	SiteDetails *comps.SiteDetails		`json:"-"`
+	Log sli.ISimpleLogger				`json:"-"`
 }
 
 func NewUIEngine(sitename string, log sli.ISimpleLogger) *UIEngine {
@@ -39,14 +39,14 @@ func (uie *UIEngine) LoadCSSFiles(myDir string) {
 
 		} else {
 
-			fmt.Printf("  dir: %v\n", filepath.Dir(path))
-			fmt.Printf("  file name %v \n", info.Name())
-			fmt.Printf("  extenion: %v \n", filepath.Ext(path))
+			uie.Log.LogDebugf("LoadCSSFiles","  dir: %v", filepath.Dir(path))
+			uie.Log.LogDebugf("LoadCSSFiles","  file name %v ", info.Name())
+			uie.Log.LogDebugf("LoadCSSFiles","  extenion: %v ", filepath.Ext(path))
 			if filepath.Ext(path) == ".css" {
 				cssIncludes := uie.SiteDetails.CSSIncludes
 				cssIncludes = append(cssIncludes, &comps.CSSLink{ Href: "/"+path  } )
 				uie.SiteDetails.CSSIncludes = cssIncludes
-				fmt.Printf("Added CSS include: %v \n", path)
+				uie.Log.LogDebugf("LoadCSSFiles","Added CSS include: %v", path)
 
 			}
 		}
@@ -57,7 +57,7 @@ func (uie *UIEngine) LoadCSSFiles(myDir string) {
 	err := filepath.Walk(myDir, loadcss)
 
 	if err != nil {
-		fmt.Printf("error walking the path %q: %v\n", myDir, err)
+		uie.Log.LogDebugf("LoadCSSFiles","error walking the path %q: %v", myDir, err)
 	}
 }
 
@@ -66,25 +66,25 @@ func (uie *UIEngine) LoadJavascriptFiles(myDir string) {
 	var loadjs = func(path string, info os.FileInfo, err error) error {
 		// first thing to do, check error. and decide what to do about it
 		if err != nil {
-			fmt.Printf("error %v at a path %q\n", err, path)
+			uie.Log.LogErrorf("LoadJavascriptFiles","error %v at a path %q", err, path)
 			return err
 		}
 
-		fmt.Printf("path: %v\n", path)
+		uie.Log.LogDebugf("LoadJavascriptFiles","path: %v\n", path)
 
 		// find out if it's a dir or file, if file, print info
 		if info.IsDir() {
-			fmt.Printf("is dir.\n")
+			fmt.Printf("is dir.")
 		} else {
 
-			fmt.Printf("  dir: %v\n", filepath.Dir(path))
-			fmt.Printf("  file name %v \n", info.Name())
-			fmt.Printf("  extenion: %v \n", filepath.Ext(path))
+			uie.Log.LogDebugf("LoadJavascriptFiles","  dir: %v", filepath.Dir(path))
+			uie.Log.LogDebugf("LoadJavascriptFiles","  file name %v", info.Name())
+			uie.Log.LogDebugf("LoadJavascriptFiles","  extenion: %v ", filepath.Ext(path))
 			if filepath.Ext(path) == ".js" {
 				jsIncludes := uie.SiteDetails.JSIncludes
 				jsIncludes = append(jsIncludes, &comps.JSInclude{ Src: "/"+path  } )
 				uie.SiteDetails.JSIncludes = jsIncludes
-				fmt.Printf("Added JS include: %v \n", path)
+				uie.Log.LogDebugf("LoadJavascriptFiles","Added JS include: %v", path)
 			}
 		}
 
@@ -94,7 +94,7 @@ func (uie *UIEngine) LoadJavascriptFiles(myDir string) {
 	err := filepath.Walk(myDir, loadjs)
 
 	if err != nil {
-		fmt.Printf("error walking the path %q: %v\n", myDir, err)
+		uie.Log.LogDebugf("LoadJavascriptFiles","error walking the path %q: %v", myDir, err)
 	}
 }
 
