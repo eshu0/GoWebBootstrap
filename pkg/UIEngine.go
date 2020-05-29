@@ -100,7 +100,7 @@ func (uie *UIEngine) LoadJavascriptFiles(myDir string) {
 
 func (uie *UIEngine) NewModal(Id string) *comps.Modal {
 
-	md := 	Modal{ Id: Id } 
+	md := 	comps.Modal{ Id: Id } 
 	
 	md.HeaderText = ""
 	md.HasHeader = true
