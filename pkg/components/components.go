@@ -1,5 +1,9 @@
 package Components 
 
+import (
+	"html/template"
+)
+
 type NavLink struct {
 	Active bool
 	Href string
@@ -67,7 +71,6 @@ type PageDetails struct{
 	HasAddButton bool
 	AddButtonHref string
 	AddButtonText string
-	Job *Job
 	IsCardpage bool	
 	IsItempage bool
 	IsModalpage bool
