@@ -1,7 +1,6 @@
 package UIEngine 
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"	
 	
@@ -74,7 +73,7 @@ func (uie *UIEngine) LoadJavascriptFiles(myDir string) {
 
 		// find out if it's a dir or file, if file, print info
 		if info.IsDir() {
-			fmt.Printf("is dir.")
+			uie.Log.LogDebug("LoadJavascriptFiles","is dir.")
 		} else {
 
 			uie.Log.LogDebugf("LoadJavascriptFiles","  dir: %v", filepath.Dir(path))
