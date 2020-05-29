@@ -4,10 +4,9 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"	
-	"html/template"
 	
 	sli "github.com/eshu0/simplelogger/interfaces"
-
+	"github.com/eshu0/GoWebBootstrap/pkg/components"
 )
 
 type UIEngine struct {
