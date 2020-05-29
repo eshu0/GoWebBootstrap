@@ -14,11 +14,11 @@ type UIEngine struct {
 	Log sli.ISimpleLogger		`json:"-"`
 }
 
-func NewUIEngine(sitename string) *UIEngine {
+func NewUIEngine(sitename string, log sli.ISimpleLogger) *UIEngine {
 	sd := comps.SiteDetails{ Name: sitename }
 	navitems := []*comps.NavLink{}
 	sd.NavItems = navitems
-	uie := UIEngine{ SiteDetails:&sd }
+	uie := UIEngine{ SiteDetails:&sd, Log: log}
 	return &uie
 }
 
