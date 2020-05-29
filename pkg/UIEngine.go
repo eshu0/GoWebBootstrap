@@ -21,6 +21,12 @@ func NewUIEngine(sitename string, log sli.ISimpleLogger) *UIEngine {
 	return &uie
 }
 
+func (uie *UIEngine) AddNavLink(href string,displayName string, active bool){
+	navitems := uie.SiteDetails.NavItems
+	navitems = append(navitems,&NavLink{Href:href, DisplayName: displayName, Active: active})
+	uie.SiteDetails.NavItems = navitems
+}
+
 func (uie *UIEngine) LoadCSSFiles(myDir string) {
 
 	var loadcss = func(path string, info os.FileInfo, err error) error {
