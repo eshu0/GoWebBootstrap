@@ -6,11 +6,11 @@ import (
 	"path/filepath"	
 	
 	sli "github.com/eshu0/simplelogger/interfaces"
-	"github.com/eshu0/GoWebBootstrap/pkg/components"
+	comps "github.com/eshu0/GoWebBootstrap/pkg/components"
 )
 
 type UIEngine struct {
-	SiteDetails *SiteDetails    `json:"-"`
+	SiteDetails *comps.SiteDetails    `json:"-"`
 	Log sli.ISimpleLogger		`json:"-"`
 }
 
@@ -98,7 +98,7 @@ func (uie *UIEngine) LoadJavascriptFiles(myDir string) {
 	}
 }
 
-func (uie *UIEngine) NewModal(Id string) *Modal {
+func (uie *UIEngine) NewModal(Id string) *comps.Modal {
 
 	md := 	Modal{ Id: Id } 
 	
@@ -115,9 +115,9 @@ func (uie *UIEngine) NewModal(Id string) *Modal {
 	return &md
 }
 
-func (uie *UIEngine) NewPageDetails() *PageDetails {
+func (uie *UIEngine) NewPageDetails() *comps.PageDetails {
 
-	pd := 	PageDetails{ SiteDetails: uie.SiteDetails } 
+	pd := 	comps.PageDetails{ SiteDetails: uie.SiteDetails } 
 
 	pd.IsCardpage = false
 	pd.IsItempage = false
@@ -130,7 +130,7 @@ func (uie *UIEngine) NewPageDetails() *PageDetails {
 	return &pd
 }
 
-func (uie *UIEngine) NewCardPage(title string, modals[]*Modal, crumbs []*BreadCrumb, cards []*Card) *PageDetails {
+func (uie *UIEngine) NewCardPage(title string, modals[]*comps.Modal, crumbs []*comps.BreadCrumb, cards []*comps.Card) *comps.PageDetails {
 
 	pd := uie.NewPageDetails()
 
@@ -146,7 +146,7 @@ func (uie *UIEngine) NewCardPage(title string, modals[]*Modal, crumbs []*BreadCr
 	return pd
 }
 
-func (uie *UIEngine) NewItemPage(title string, modals[]*Modal, crumbs []*BreadCrumb) *PageDetails {
+func (uie *UIEngine) NewItemPage(title string, modals[]*comps.Modal, crumbs []*comps.BreadCrumb) *comps.PageDetails {
 
 	pd := uie.NewPageDetails()
 
