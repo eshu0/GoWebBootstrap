@@ -15,8 +15,8 @@ type UIEngine struct {
 }
 
 func NewUIEngine(sitename string) *UIEngine {
-	sd := SiteDetails{ Name: sitename }
-	navitems := []*NavLink{}
+	sd := comps.SiteDetails{ Name: sitename }
+	navitems := []*comps.NavLink{}
 	sd.NavItems = navitems
 	uie := UIEngine{ SiteDetails:&sd }
 	return &uie
@@ -44,7 +44,7 @@ func (uie *UIEngine) LoadCSSFiles(myDir string) {
 			fmt.Printf("  extenion: %v \n", filepath.Ext(path))
 			if filepath.Ext(path) == ".css" {
 				cssIncludes := uie.SiteDetails.CSSIncludes
-				cssIncludes = append(cssIncludes, &CSSLink{ Href: "/"+path  } )
+				cssIncludes = append(cssIncludes, &comps.CSSLink{ Href: "/"+path  } )
 				uie.SiteDetails.CSSIncludes = cssIncludes
 				fmt.Printf("Added CSS include: %v \n", path)
 
@@ -82,7 +82,7 @@ func (uie *UIEngine) LoadJavascriptFiles(myDir string) {
 			fmt.Printf("  extenion: %v \n", filepath.Ext(path))
 			if filepath.Ext(path) == ".js" {
 				jsIncludes := uie.SiteDetails.JSIncludes
-				jsIncludes = append(jsIncludes, &JSInclude{ Src: "/"+path  } )
+				jsIncludes = append(jsIncludes, &comps.JSInclude{ Src: "/"+path  } )
 				uie.SiteDetails.JSIncludes = jsIncludes
 				fmt.Printf("Added JS include: %v \n", path)
 			}
@@ -110,7 +110,7 @@ func (uie *UIEngine) NewModal(Id string) *comps.Modal {
 
 	md.FooterText =  "" //template.HTML(" ")
 	md.HasFooter = true
-	md.FooterButtons =  []*Button{}
+	md.FooterButtons =  []*comps.Button{}
 
 	return &md
 }
@@ -123,9 +123,9 @@ func (uie *UIEngine) NewPageDetails() *comps.PageDetails {
 	pd.IsItempage = false
 	pd.IsModalpage = false
 
-	pd.BreadCrumbs = []*BreadCrumb{}
-	pd.Cards = []*Card{}	
-	pd.Modals = []*Modal{}
+	pd.BreadCrumbs = []*comps.BreadCrumb{}
+	pd.Cards = []*comps.Card{}	
+	pd.Modals = []*comps.Modal{}
 
 	return &pd
 }
@@ -156,7 +156,7 @@ func (uie *UIEngine) NewItemPage(title string, modals[]*comps.Modal, crumbs []*c
 	pd.PageTitle = title
 
 	pd.BreadCrumbs = crumbs
-	pd.Cards = []*Card{}	
+	pd.Cards = []*comps.Card{}	
 	pd.Modals = modals
 
 	return pd
