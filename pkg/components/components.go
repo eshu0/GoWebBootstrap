@@ -77,5 +77,5 @@ type PageDetails struct{
 	BreadCrumbs []*BreadCrumb
 	Cards []*Card
 	Modals []*Modal	
-	JSONData string
+	JSONData template.HTML
 }
