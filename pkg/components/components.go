@@ -30,6 +30,7 @@ type Card struct {
 	Description string
 	Mutedtext string
 	Buttons []*Button
+	Fill string
 }
 
 
